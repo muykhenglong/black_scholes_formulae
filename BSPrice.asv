@@ -1,0 +1,16 @@
+function [outputArg1,outputArg2] = untitled2(inputArg1,inputArg2)
+% European Black Scholes Call & Put Price
+
+d1 = (log(S/K) + (r - q + .5 * vol^2) * T) / (vol * sqrt(T))
+d2 = d1 - vol * sqrt(T)
+
+% call Price = S e^(-qt) * n(d1) - K e^(-rt) n(d2)
+% put price = k e^(-rt) n(-d2) - s e^(-qt) n(-d1)
+
+    if Iscall
+        Delta = exp(-q * t) * normcdf(d1)
+        Price = S * Delta - K * exp(-r * t) * normcdf(d2)
+    else
+        Delta = exp(-q * t) * normcdf(-d1)
+        Price = K * exp(-r * t) * normcdf(-d2) - S * Delta 
+    end
